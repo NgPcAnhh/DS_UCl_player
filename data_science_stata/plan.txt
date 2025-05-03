@@ -1,0 +1,33 @@
+Đề tài: đánh giá rating cầu thủ xu hướng tấn công  cầu thủ qua champion league 
+
+Pipeline: 
+crawl dữ liệu => clean data => chuyển đổi sang csv => thực hiện model supported vector machine => Xử lý => thực hiện thống kê 
+
+Ý tưởng: 
+	crawl data:
+	player["name["EN"]"]
+	statistics["name[goals['value']]"]
+	statistics["name[minutes_played_official['value']]
+	statistics["name[assists[value]]
+	statistics["name[distance_covered[value]]"]
+	statistics["name[top_speed[value]]"]
+
+	Cách ước lượng: hạ chân đường vuông góc xuống hyperplace, chuẩn hóa độ dài (0,5) => độ dài ở trên mp +5, độ dài ở dưới mp 5-x => tạo ra thước đo thang 10 
+
+	Thuật toán sử dụng:  Supported Vecto Machine
+
+	Quy tắc xếp hạng: Chuyển thang 10 
+	0.0-3.9đ == F
+	4.0-5.4đ == D
+	5.5-6.9đ == C
+	7.0-8.4đ == B
+	8.5-10đ  == A
+
+
+Thứ tự chạy file:
+B1: crawl dữ liệu => csv/ucl_stats.csv (hoặc ucl_player_stats.csv)
+B2: loại bỏ giá trị thừa >>> chạy clean.py
+B3: Xử lý tạo SVM trong svm.ipynb
+B4: thực hiện kiểm định
+
+

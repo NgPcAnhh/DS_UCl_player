@@ -1,0 +1,28 @@
+clear
+set more off, permanently
+cd "C:\Users\ADMIN\OneDrive\Máy tính\tai lieu hoc tap\kinh tế lượng\dataa\csv"
+capture log using ucl_player_stats.log, replace
+
+import delimited ucl_player_stats.csv, clear
+gen STT = _n
+*******************Thong ke mo ta**********************
+tabstat goals minutes_played_official assists distance_covered top_speed, statistics(mean, count, max, min, range, sd, variance, cv, semean, skewness, kurtosis, median)
+tabulate goals
+tabulate assists
+tabstat minutes_played_official assists distance_covered top_speed, statistics(mean, count, max, min, range, sd, variance, cv, semean, skewness, kurtosis, median) by (goals)
+pwcorr goals minutes_played_official assists distance_covered top_speed, sig
+*******************Trien khai mo hinh******************
+regress goals minutes_played_official assists distance_covered top_speed
+
+*******************Kiem dinh***************************
+
+ovtest //Dang mo hinh
+
+vif //Da cong tuyen
+
+tsset STT
+estat durbinalt //Kiểm định Durbin
+bgodfrey // Kiểm định Breusch-Godfrey LM bậc 1
+
+estat imtest // Kiểm định White, phương sai sai số thay đổi
+estat hettest // Kiểm định Breusch-Godfrey, phương sai sai số thay đổi

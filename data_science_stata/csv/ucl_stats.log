@@ -1,0 +1,51 @@
+
+. 
+. * 4. Import dữ liệu CSV
+. import delimited ucl_stats.csv, clear
+(encoding automatically selected: UTF-8)
+(6 vars, 1,104 obs)
+
+. 
+. * 5. Tạo biến STT nếu cần (dùng làm chỉ mục hoặc cho chuỗi thời gian)
+. gen STT = _n
+
+. 
+. * 6. Sắp xếp dữ liệu theo STT (tùy chọn)
+. sort STT
+
+. 
+. **************************************************
+. * PHẦN 1: THỐNG KÊ MÔ TẢ
+. **************************************************
+. 
+. * 6.1 Thống kê mô tả chung cho các chỉ số thi đấu
+. tabstat goals assists distance total_minutes, ///
+>     statistics(mean count max min range sd variance cv semean skewness kurtosis median) ///
+>     columns(statistics)
+variable total_minutes not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "C:\Users\ADMIN\AppData\Local\Temp\STD4174_000000.tmp"
+
+. ***************************************
+. * DO-FILE PHÂN TÍCH DỮ LIỆU BÓNG ĐÁ  *
+. ***************************************
+. 
+. * 1. Khởi tạo môi trường làm việc
+. clear
+
+. set more off, permanently
+(set more preference recorded)
+
+. 
+. * 2. Đặt thư mục làm việc
+. cd "C:\Users\ADMIN\OneDrive\Máy tính\tai lieu hoc tap\kinh tế lượng\data_science_stata\csv"
+C:\Users\ADMIN\OneDrive\Máy tính\tai lieu hoc tap\kinh tế lượng\data_science_stata\csv
+
+. 
+. * 3. Ghi log kết quả
+. capture log close
